@@ -1,0 +1,52 @@
+class_name GameManager
+extends Node2D
+#临时数据前面加个_
+#这里面大部分关于实例化，设置等知识我都只是一知半解找AI学的
+#回头仔细学习估量一下节点的创建，实例化，添加等
+
+var hand_num := 5
+var deck: Array[Card]
+var temp_deck: Array[Card]
+var _card_scene = preload("res://scenes/card.tscn")
+
+@onready var card_manager: CardManager = $"../CardManager"
+
+func _ready() -> void:
+	deck = create_deck()
+	temp_deck = deck
+	draw_card(hand_num - card_manager.hand_count)
+	
+
+func create_deck() -> Array[Card]:
+	var _deck: Array[Card]
+	for i in range(Card.Suits.size()):      # i 是 0, 1, 2, 3
+		for j in range(Card.Points.size()):  # j 是 0, 1, 2 ... 12
+			var _card = _card_scene.instantiate()
+			#TODO 学习知识，如果for i in Suits那获取的都是字符串
+			_card.suit = i as Card.Suits      # 转换为枚举类型
+			_card.point = j as Card.Points    # 转换为枚举类型
+			_deck.append(_card)
+	return _deck
+
+#TODO 抽牌系统 得有随机
+func draw_card(count: int) -> void:
+	if temp_deck.size() == 0:
+		return
+	if temp_deck.size() < count:
+		count = temp_deck.size()
+	
+	for i in count:
+		card_manager.hand_count += 1
+		var random_index = randi_range(0,temp_deck.size()-1)
+		var _card = temp_deck[random_index]
+		temp_deck.remove_at(random_index)
+		add_card(_card.suit,_card.point)
+		
+
+func add_card(suit, point) -> void:
+	var new_card = _card_scene.instantiate()
+	new_card.suit = suit
+	new_card.point = point
+	card_manager.hand_card.append(new_card)
+	card_manager.add_child(new_card)
+	card_manager.update_pos(card_manager.hand_card)

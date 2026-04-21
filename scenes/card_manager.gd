@@ -3,36 +3,35 @@ extends Node2D
 
 const CARD_Y_POS := 800
 
-signal cards_sorted(cards:Array[Card])
+@onready var game_manager: GameManager = $"../GameManager"
 
-var cards: Array[Card]
-	
+signal cards_sorted(hand_card:Array[Card])
+
+var hand_card: Array[Card]
+var hand_count = 0
 var pos_arr: Array[Vector2]
 var dragging_card: Card = null
 
 func _ready() -> void:
-	for child in get_children():
-		cards.append(child)
-	update_pos(cards)
+	await game_manager.ready
+	update_pos(hand_card)
 	cards_sorted.connect(update_pos)
 	
-func update_pos(cards: Array[Card]) -> void:
-	var pos_arr: Array[Vector2]
-	for i in range(cards.size()):
-		var card = cards[i]
-		cards[i].z_idx = i
-		cards[i].z_index = i
+func update_pos(hand_card: Array[Card]) -> void:
+	for i in range(hand_card.size()):
+		var card = hand_card[i]
+		hand_card[i].z_idx = i
+		hand_card[i].z_index = i
 		var tween = create_tween()
-		tween.tween_property(cards[i], "position", Vector2(480+960/(cards.size() - 1) * i, CARD_Y_POS), 0.1)
+		tween.tween_property(hand_card[i], "position", Vector2(480+960/(hand_card.size()) * i, CARD_Y_POS), 0.1)
 	return
 
 func _physics_process(delta: float) -> void:
 	if not dragging_card:
 		sort_cards_by_x()
-		update_pos(cards)
+		update_pos(hand_card)
 
 func request_drag(card: Card) -> bool:
-	#FIXME 这里cards应该只获取鼠标下的，但是获取到所有卡牌中的最高了，所以不对
 	var up_card = ray_cast_check()
 	if dragging_card == null and card == up_card:
 		dragging_card = card
@@ -66,4 +65,4 @@ func get_highest_z_index_card(arr:Array[Dictionary]) -> Node:
 	return highest_card
 
 func sort_cards_by_x() -> void:
-	cards.sort_custom(func(a,b): return a.position.x < b.position.x)
+	hand_card.sort_custom(func(a,b): return a.position.x < b.position.x)
