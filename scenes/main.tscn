@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://5cgetq36y1mg"]
+
+[ext_resource type="Script" uid="uid://c3egebp7ylqct" path="res://scenes/card_manager.gd" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://br3jcv0mqriao" path="res://scenes/card.tscn" id="1_o5qli"]
+
+[node name="Main" type="Node2D" unique_id=25994913]
+
+[node name="GameManager" type="Node2D" parent="." unique_id=738848359]
+
+[node name="CardManager" type="Node2D" parent="." unique_id=1371199706]
+script = ExtResource("1_0wfyh")
+
+[node name="Card" parent="CardManager" unique_id=1962492637 instance=ExtResource("1_o5qli")]
+position = Vector2(648, 799)
+
+[node name="Card2" parent="CardManager" unique_id=1463861875 instance=ExtResource("1_o5qli")]
+position = Vector2(1291, 788)
+
+[node name="Card3" parent="CardManager" unique_id=1718455321 instance=ExtResource("1_o5qli")]
+position = Vector2(1064, 793)
+
+[node name="Card4" parent="CardManager" unique_id=1374125062 instance=ExtResource("1_o5qli")]
+position = Vector2(854, 797)
+
+[node name="Card5" parent="CardManager" unique_id=596025376 instance=ExtResource("1_o5qli")]
+position = Vector2(854, 797)
+
+[node name="Card6" parent="CardManager" unique_id=1227484093 instance=ExtResource("1_o5qli")]
+position = Vector2(648, 799)
+
+[node name="Card7" parent="CardManager" unique_id=13179445 instance=ExtResource("1_o5qli")]
+position = Vector2(1291, 788)
+
+[node name="Card8" parent="CardManager" unique_id=2087796276 instance=ExtResource("1_o5qli")]
+position = Vector2(1064, 793)
+
+[node name="Card9" parent="CardManager" unique_id=179131221 instance=ExtResource("1_o5qli")]
+position = Vector2(854, 797)
+
+[node name="Card10" parent="CardManager" unique_id=758166858 instance=ExtResource("1_o5qli")]
+position = Vector2(854, 797)
+
+[node name="Card11" parent="CardManager" unique_id=1300986716 instance=ExtResource("1_o5qli")]
+position = Vector2(648, 799)
+
+[node name="Card12" parent="CardManager" unique_id=1048106164 instance=ExtResource("1_o5qli")]
+position = Vector2(1291, 788)
+
+[node name="Card13" parent="CardManager" unique_id=1354411875 instance=ExtResource("1_o5qli")]
+position = Vector2(1064, 793)
+
+[node name="Card14" parent="CardManager" unique_id=287671561 instance=ExtResource("1_o5qli")]
+position = Vector2(854, 797)
+
+[node name="Card15" parent="CardManager" unique_id=567589983 instance=ExtResource("1_o5qli")]
+position = Vector2(854, 797)
+
+[node name="Card16" parent="CardManager" unique_id=64139493 instance=ExtResource("1_o5qli")]
+position = Vector2(648, 799)
+
+[node name="Card17" parent="CardManager" unique_id=693828605 instance=ExtResource("1_o5qli")]
+position = Vector2(1291, 788)
+
+[node name="Card18" parent="CardManager" unique_id=338766046 instance=ExtResource("1_o5qli")]
+position = Vector2(1064, 793)
+
+[node name="Card19" parent="CardManager" unique_id=1662918140 instance=ExtResource("1_o5qli")]
+position = Vector2(854, 797)
+
+[node name="Card20" parent="CardManager" unique_id=1729126036 instance=ExtResource("1_o5qli")]
+position = Vector2(854, 797)

@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://br3jcv0mqriao"]
+
+[ext_resource type="Script" uid="uid://kx7mqjw4yjpq" path="res://scenes/card.gd" id="1_q5obu"]
+[ext_resource type="Texture2D" uid="uid://bba4pb4cmirwd" path="res://textures/2x/Enhancers.png" id="1_rjlel"]
+[ext_resource type="Texture2D" uid="uid://byv4fd5vd0blq" path="res://textures/2x/8BitDeck.png" id="2_q5obu"]
+[ext_resource type="Script" uid="uid://c35ynpffx4v7k" path="res://components/DragComponent.gd" id="4_kg30u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5obu"]
+size = Vector2(138, 186)
+
+[node name="Card" type="Area2D" unique_id=1962492637]
+script = ExtResource("1_q5obu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=454209835]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_q5obu")
+
+[node name="Visuals" type="Control" parent="." unique_id=1597841761]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Base" type="Sprite2D" parent="Visuals" unique_id=583061393]
+position = Vector2(0, -1)
+texture = ExtResource("1_rjlel")
+region_enabled = true
+region_rect = Rect2(142, 0, 142, 190)
+
+[node name="Points" type="Sprite2D" parent="Visuals" unique_id=113947251]
+texture = ExtResource("2_q5obu")
+region_enabled = true
+region_rect = Rect2(1562, 570, 142, 190)
+
+[node name="DragComponent" type="Node" parent="." unique_id=760605879 node_paths=PackedStringArray("area")]
+script = ExtResource("4_kg30u")
+area = NodePath("..")
+metadata/_custom_type_script = "uid://c35ynpffx4v7k"
