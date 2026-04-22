@@ -4,7 +4,7 @@ extends Node2D
 #这里面大部分关于实例化，设置等知识我都只是一知半解找AI学的
 #回头仔细学习估量一下节点的创建，实例化，添加等
 
-var hand_num := 5
+var hand_num := 6
 var deck: Array[Card]
 var temp_deck: Array[Card]
 var _card_scene = preload("res://scenes/card.tscn")
@@ -49,4 +49,11 @@ func add_card(suit, point) -> void:
 	new_card.point = point
 	card_manager.hand_card.append(new_card)
 	card_manager.add_child(new_card)
+	
+	#后面这是AI解决加入牌的问题 应该是顺序什么的有问题 道理就是把牌添加的时候直接添加位置数据放置
+	var index = card_manager.hand_card.size() - 1
+	var divisor = max(card_manager.hand_card.size() - 1, 1)
+	var target_x = 480.0 + 960.0 / divisor * index
+	new_card.global_position = Vector2(target_x, 800)
+	
 	card_manager.update_pos(card_manager.hand_card)

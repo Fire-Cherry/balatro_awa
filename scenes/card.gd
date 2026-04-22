@@ -27,11 +27,11 @@ var z_idx
 var point: Points
 var suit: Suits
 var score
+var offset = 0
 
 func _ready() -> void:
 	drag_component.drag_started.connect(_on_drag_started)
 	drag_component.drag_ended.connect(_on_drag_ended)
-	print("set_visual")
 	set_visual()
 	
 func _on_drag_started() -> void:

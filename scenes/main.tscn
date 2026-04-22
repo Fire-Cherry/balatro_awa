@@ -10,3 +10,14 @@ script = ExtResource("1_sugp2")
 
 [node name="CardManager" type="Node2D" parent="." unique_id=1371199706]
 script = ExtResource("1_0wfyh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=909526752]
+
+[node name="DropButton" type="Button" parent="CanvasLayer" unique_id=286467576]
+offset_left = 1671.0
+offset_top = 878.0
+offset_right = 1802.0
+offset_bottom = 932.0
+text = "DropCard"
+
+[connection signal="button_down" from="CanvasLayer/DropButton" to="CardManager" method="drop_card"]

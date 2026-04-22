@@ -2,14 +2,17 @@ class_name CardManager
 extends Node2D
 
 const CARD_Y_POS := 800
+const MIN_CLICK_DIST = 5
 
 @onready var game_manager: GameManager = $"../GameManager"
 
 signal cards_sorted(hand_card:Array[Card])
 
+var click_start_pos: Vector2
+var is_mouse_pressed: bool = false
 var hand_card: Array[Card]
+var selected_card: Array[Card]
 var hand_count = 0
-var pos_arr: Array[Vector2]
 var dragging_card: Card = null
 
 func _ready() -> void:
@@ -23,13 +26,33 @@ func update_pos(hand_card: Array[Card]) -> void:
 		hand_card[i].z_idx = i
 		hand_card[i].z_index = i
 		var tween = create_tween()
-		tween.tween_property(hand_card[i], "position", Vector2(480+960/(hand_card.size()) * i, CARD_Y_POS), 0.1)
+		tween.tween_property(hand_card[i], "position", Vector2(480+960/(hand_card.size()) * i, CARD_Y_POS - card.offset), 0.1)
 	return
 
-func _physics_process(delta: float) -> void:
+func _input(event: InputEvent) -> void:
+	var can_select = selected_card.size() < 5
+	#选中卡牌 加入选中 最后判断是否是要取消 然后执行
+	#这一串语句，直接解决卡牌选中与删除，并且逻辑自洽得让update_pos顺利执行，应当反复斟酌
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.is_pressed():
+			is_mouse_pressed = true
+			click_start_pos = get_global_mouse_position()
+		elif event.is_released() and is_mouse_pressed:
+			is_mouse_pressed = false
+			if (get_global_mouse_position() - click_start_pos).length() < MIN_CLICK_DIST:
+				var card = ray_cast_check()
+				if card:
+					if selected_card.has(card):
+						card.offset = 0
+						selected_card.erase(card)
+					elif selected_card.size() < 5:
+						card.offset = 20
+						selected_card.append(card)
+	#检测卡牌
 	if not dragging_card:
 		sort_cards_by_x()
 		update_pos(hand_card)
+		
 
 func request_drag(card: Card) -> bool:
 	var up_card = ray_cast_check()
@@ -66,3 +89,16 @@ func get_highest_z_index_card(arr:Array[Dictionary]) -> Node:
 
 func sort_cards_by_x() -> void:
 	hand_card.sort_custom(func(a,b): return a.position.x < b.position.x)
+
+#此处迭代时erase会直接改变数组长度从而改变迭代次数，所以会造成下次还有卡牌选中的现象(AI如是说)
+func drop_card() -> void:
+	if selected_card.is_empty():
+		return
+	
+	for _card in selected_card:
+		hand_count -= 1
+		_card.queue_free()
+		hand_card.erase(_card)
+	
+	selected_card.clear()
+	game_manager.draw_card(game_manager.hand_num - hand_count)
