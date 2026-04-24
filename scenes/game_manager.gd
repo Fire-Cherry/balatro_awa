@@ -37,7 +37,7 @@ func draw_card(count: int) -> void:
 	
 	for i in count:
 		card_manager.hand_count += 1
-		var random_index = randi_range(0,temp_deck.size()-1)
+		var random_index = randi_range(0,temp_deck.size() - 1)
 		var _card = temp_deck[random_index]
 		temp_deck.remove_at(random_index)
 		add_card(_card.suit,_card.point)

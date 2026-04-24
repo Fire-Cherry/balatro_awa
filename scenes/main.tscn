@@ -20,4 +20,20 @@ offset_right = 1802.0
 offset_bottom = 932.0
 text = "DropCard"
 
+[node name="PointButton" type="Button" parent="CanvasLayer" unique_id=786068797]
+offset_left = 941.0
+offset_top = 971.0
+offset_right = 1049.0
+offset_bottom = 1002.0
+text = "Sort by point"
+
+[node name="SuitButton" type="Button" parent="CanvasLayer" unique_id=600443908]
+offset_left = 688.0
+offset_top = 971.0
+offset_right = 784.0
+offset_bottom = 1002.0
+text = "Sort by suit"
+
 [connection signal="button_down" from="CanvasLayer/DropButton" to="CardManager" method="drop_card"]
+[connection signal="button_down" from="CanvasLayer/PointButton" to="CardManager" method="sort_card_point"]
+[connection signal="button_down" from="CanvasLayer/SuitButton" to="CardManager" method="sort_card_suit"]

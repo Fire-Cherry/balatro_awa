@@ -14,6 +14,8 @@ var hand_card: Array[Card]
 var selected_card: Array[Card]
 var hand_count = 0
 var dragging_card: Card = null
+	
+	
 
 func _ready() -> void:
 	await game_manager.ready
@@ -26,7 +28,7 @@ func update_pos(hand_card: Array[Card]) -> void:
 		hand_card[i].z_idx = i
 		hand_card[i].z_index = i
 		var tween = create_tween()
-		tween.tween_property(hand_card[i], "position", Vector2(480+960/(hand_card.size()) * i, CARD_Y_POS - card.offset), 0.1)
+		tween.tween_property(hand_card[i], "position", Vector2(480+960/(hand_card.size()) * i, CARD_Y_POS - card.offset), 0.07)
 	return
 
 func _input(event: InputEvent) -> void:
@@ -90,6 +92,12 @@ func get_highest_z_index_card(arr:Array[Dictionary]) -> Node:
 func sort_cards_by_x() -> void:
 	hand_card.sort_custom(func(a,b): return a.position.x < b.position.x)
 
+func sort_cards_by_point() -> void:
+	hand_card.sort_custom(func(a,b): return a.point > b.point)
+	
+func sort_cards_by_club() -> void:
+	hand_card.sort_custom(func(a,b): return a.suit > b.suit)
+	
 #此处迭代时erase会直接改变数组长度从而改变迭代次数，所以会造成下次还有卡牌选中的现象(AI如是说)
 func drop_card() -> void:
 	if selected_card.is_empty():
@@ -102,3 +110,14 @@ func drop_card() -> void:
 	
 	selected_card.clear()
 	game_manager.draw_card(game_manager.hand_num - hand_count)
+	sort_cards_by_point()
+	update_pos(hand_card)
+
+
+func sort_card_point() -> void:
+	sort_cards_by_point()
+	update_pos(hand_card)
+
+func sort_card_suit() -> void:
+	sort_cards_by_club()
+	update_pos(hand_card)
