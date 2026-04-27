@@ -20,6 +20,13 @@ offset_right = 1802.0
 offset_bottom = 932.0
 text = "DropCard"
 
+[node name="PlayButton" type="Button" parent="CanvasLayer" unique_id=129968833]
+offset_left = 1671.0
+offset_top = 792.0
+offset_right = 1802.0
+offset_bottom = 846.0
+text = "PlayCard"
+
 [node name="PointButton" type="Button" parent="CanvasLayer" unique_id=786068797]
 offset_left = 941.0
 offset_top = 971.0
@@ -34,6 +41,15 @@ offset_right = 784.0
 offset_bottom = 1002.0
 text = "Sort by suit"
 
+[node name="Ranking" type="Label" parent="CanvasLayer" unique_id=1824977673]
+offset_left = 233.0
+offset_top = 233.0
+offset_right = 347.0
+offset_bottom = 267.0
+theme_override_font_sizes/font_size = 24
+text = "High Card"
+
 [connection signal="button_down" from="CanvasLayer/DropButton" to="CardManager" method="drop_card"]
+[connection signal="button_down" from="CanvasLayer/PlayButton" to="CardManager" method="play_card"]
 [connection signal="button_down" from="CanvasLayer/PointButton" to="CardManager" method="sort_card_point"]
 [connection signal="button_down" from="CanvasLayer/SuitButton" to="CardManager" method="sort_card_suit"]

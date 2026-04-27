@@ -4,12 +4,13 @@ extends Node2D
 #这里面大部分关于实例化，设置等知识我都只是一知半解找AI学的
 #回头仔细学习估量一下节点的创建，实例化，添加等
 
-var hand_num := 6
+var hand_num := 8
 var deck: Array[Card]
 var temp_deck: Array[Card]
 var _card_scene = preload("res://scenes/card.tscn")
 
 @onready var card_manager: CardManager = $"../CardManager"
+@onready var ranking: Label = $"../CanvasLayer/Ranking"
 
 func _ready() -> void:
 	deck = create_deck()
@@ -57,3 +58,6 @@ func add_card(suit, point) -> void:
 	new_card.global_position = Vector2(target_x, 800)
 	
 	card_manager.update_pos(card_manager.hand_card)
+
+func set_ranking(rank:String) -> void:
+	ranking.text = rank

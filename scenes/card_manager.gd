@@ -5,6 +5,7 @@ const CARD_Y_POS := 800
 const MIN_CLICK_DIST = 5
 
 @onready var game_manager: GameManager = $"../GameManager"
+@onready var ranking: Label = $"../CanvasLayer/Ranking"
 
 signal cards_sorted(hand_card:Array[Card])
 
@@ -15,8 +16,6 @@ var selected_card: Array[Card]
 var hand_count = 0
 var dragging_card: Card = null
 	
-	
-
 func _ready() -> void:
 	await game_manager.ready
 	update_pos(hand_card)
@@ -28,7 +27,7 @@ func update_pos(hand_card: Array[Card]) -> void:
 		hand_card[i].z_idx = i
 		hand_card[i].z_index = i
 		var tween = create_tween()
-		tween.tween_property(hand_card[i], "position", Vector2(480+960/(hand_card.size()) * i, CARD_Y_POS - card.offset), 0.07)
+		tween.tween_property(hand_card[i], "position", Vector2(480+960/(hand_card.size()) * i, CARD_Y_POS - card.offset), 0.1)
 	return
 
 func _input(event: InputEvent) -> void:
@@ -54,6 +53,11 @@ func _input(event: InputEvent) -> void:
 	if not dragging_card:
 		sort_cards_by_x()
 		update_pos(hand_card)
+	
+	if selected_card:
+		var rank: String = PlayLogic.check_rank(selected_card)
+		ranking.text = rank
+	
 		
 
 func request_drag(card: Card) -> bool:
@@ -121,3 +125,10 @@ func sort_card_point() -> void:
 func sort_card_suit() -> void:
 	sort_cards_by_club()
 	update_pos(hand_card)
+
+
+func play_card() -> void:
+	if selected_card.is_empty():
+		return
+		
+	
