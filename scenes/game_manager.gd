@@ -4,6 +4,22 @@ extends Node2D
 #这里面大部分关于实例化，设置等知识我都只是一知半解找AI学的
 #回头仔细学习估量一下节点的创建，实例化，添加等
 
+const rank_list = {
+	"High Card" = [5,1],
+	"Pair" = [10,2],
+	"Two Pair" = [20,2],
+	"Three of a Kind" = [30,3],
+	"Stright" = [30,4],
+	"Flush" = [35,4],
+	"Full House" = [40,4],
+	"Four of a Kind" = [60,7],
+	"Flush Stright" = [100,8]
+}
+
+
+var now_chips := 0
+var now_mult := 0
+var now_score := 0
 var hand_num := 8
 var deck: Array[Card]
 var temp_deck: Array[Card]
@@ -11,6 +27,9 @@ var _card_scene = preload("res://scenes/card.tscn")
 
 @onready var card_manager: CardManager = $"../CardManager"
 @onready var ranking: Label = $"../CanvasLayer/Ranking"
+@onready var chips_label: Label = $"../CanvasLayer/ChipsLabel"
+@onready var score_label: Label = $"../CanvasLayer/ScoreLabel"
+@onready var mult_label: Label = $"../CanvasLayer/MultLabel"
 
 func _ready() -> void:
 	deck = create_deck()
@@ -61,3 +80,21 @@ func add_card(suit, point) -> void:
 
 func set_ranking(rank:String) -> void:
 	ranking.text = rank
+	now_chips = rank_list[rank][0]
+	now_mult = rank_list[rank][1]
+	chips_label.text = str(now_chips)
+	mult_label.text = str(now_mult)
+	
+
+
+func play_card() -> void:
+	if card_manager.selected_card.is_empty():
+		return
+		
+	#TODO 一时半会做不到，但是出牌动画
+	#FIXME 我今天暂时先把这个出牌写成不计算手牌只计算牌型，明天想办法改
+	#FIXME 虽然这可能是最难的一步，但很晚了，而且琐碎的都做完了只需要完善PlayLogic或者另写了
+	now_score += now_chips * now_mult
+	score_label.text = str(now_score)
+	card_manager.drop_card()
+	

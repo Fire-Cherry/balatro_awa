@@ -49,7 +49,42 @@ offset_bottom = 267.0
 theme_override_font_sizes/font_size = 24
 text = "High Card"
 
+[node name="ChipsLabel" type="Label" parent="CanvasLayer" unique_id=1561683383]
+offset_left = 307.0
+offset_top = 307.0
+offset_right = 347.0
+offset_bottom = 330.0
+theme_override_colors/font_color = Color(0.6260754, 0, 0.08377037, 1)
+text = "0"
+horizontal_alignment = 1
+
+[node name="MultLabel" type="Label" parent="CanvasLayer" unique_id=2090736960]
+offset_left = 233.0
+offset_top = 307.0
+offset_right = 273.0
+offset_bottom = 330.0
+theme_override_colors/font_color = Color(0, 0.4505089, 0.999319, 1)
+text = "0"
+horizontal_alignment = 1
+
+[node name="X" type="Label" parent="CanvasLayer" unique_id=1133912400]
+offset_left = 273.0
+offset_top = 307.0
+offset_right = 313.0
+offset_bottom = 330.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "X"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=582992179]
+offset_left = 233.0
+offset_top = 170.0
+offset_right = 273.0
+offset_bottom = 193.0
+text = "0"
+horizontal_alignment = 1
+
 [connection signal="button_down" from="CanvasLayer/DropButton" to="CardManager" method="drop_card"]
-[connection signal="button_down" from="CanvasLayer/PlayButton" to="CardManager" method="play_card"]
+[connection signal="button_down" from="CanvasLayer/PlayButton" to="GameManager" method="play_card"]
 [connection signal="button_down" from="CanvasLayer/PointButton" to="CardManager" method="sort_card_point"]
 [connection signal="button_down" from="CanvasLayer/SuitButton" to="CardManager" method="sort_card_suit"]

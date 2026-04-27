@@ -56,7 +56,7 @@ func _input(event: InputEvent) -> void:
 	
 	if selected_card:
 		var rank: String = PlayLogic.check_rank(selected_card)
-		ranking.text = rank
+		game_manager.set_ranking(rank)
 	
 		
 
@@ -127,8 +127,6 @@ func sort_card_suit() -> void:
 	update_pos(hand_card)
 
 
-func play_card() -> void:
-	if selected_card.is_empty():
-		return
-		
+
+	
 	
