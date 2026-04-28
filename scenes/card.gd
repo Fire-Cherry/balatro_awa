@@ -26,7 +26,6 @@ enum Points {
 var z_idx
 var point: Points
 var suit: Suits
-var score
 var offset = 0
 
 func _ready() -> void:

@@ -92,8 +92,9 @@ func play_card() -> void:
 		return
 		
 	#TODO 一时半会做不到，但是出牌动画
-	#FIXME 我今天暂时先把这个出牌写成不计算手牌只计算牌型，明天想办法改
-	#FIXME 虽然这可能是最难的一步，但很晚了，而且琐碎的都做完了只需要完善PlayLogic或者另写了
+	var score_cards = PlayLogic.calculate_score(card_manager.selected_card).scoring_cards
+	for card in score_cards:
+		now_chips += (card.point + 2)
 	now_score += now_chips * now_mult
 	score_label.text = str(now_score)
 	card_manager.drop_card()
