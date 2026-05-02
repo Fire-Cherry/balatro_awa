@@ -26,6 +26,7 @@ var hand_num := 8
 var deck: Array[Card]
 var temp_deck: Array[Card]
 var _card_scene = preload("res://scenes/card.tscn")
+var is_scoring := false
 
 @onready var card_manager: CardManager = $"../CardManager"
 @onready var ranking: Label = $"../CanvasLayer/Ranking"
@@ -93,14 +94,37 @@ func set_ranking(rank:String) -> void:
 func play_card() -> void:
 	if card_manager.selected_card.is_empty():
 		return
+	
+	is_scoring = true
+	var score_result = PlayLogic.calculate_score(card_manager.selected_card)
+	card_manager.sort_cards_by_x(card_manager.selected_card)
+	for i in card_manager.selected_card.size():
+		var tween = create_tween()
+		tween.tween_property(card_manager.selected_card[i], "position", 
+							Vector2(480+960/(card_manager.selected_card.size()) * i, 500), 1)
+	
+	await get_tree().create_timer(1).timeout
+	
+	for card in score_result.scoring_cards:
+		var tween = create_tween()
+		tween.tween_property(card, "scale", Vector2(1.2, 1.2), 0.15)
+		tween.tween_property(card, "scale", Vector2(1.0, 1.0), 0.1)
 		
-	#TODO 一时半会做不到，但是出牌动画
-	var score_cards = PlayLogic.calculate_score(card_manager.selected_card).scoring_cards
-	for card in score_cards:
 		now_chips += (card.point + 2)
+		chips_label.text = str(now_chips)
+		
+		await tween.finished
+		await get_tree().create_timer(0.1).timeout
+	
+	await get_tree().create_timer(0.2).timeout
+	
 	now_score += now_chips * now_mult
 	score_label.text = str(now_score)
 	card_manager.drop_card()
+	is_scoring = false
 	
-	if now_score >= goal:
+	if now_score > goal:
 		get_tree().change_scene_to_packed(reward_room)
+	
+func highlight_card(card:Card) -> void:
+	card.position.y -= 15

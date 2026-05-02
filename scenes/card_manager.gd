@@ -50,11 +50,12 @@ func _input(event: InputEvent) -> void:
 						card.offset = 20
 						selected_card.append(card)
 	#检测卡牌
-	if not dragging_card:
-		sort_cards_by_x()
+	if not dragging_card and not game_manager.is_scoring:
+		sort_cards_by_x(hand_card)
+		sort_cards_by_x(selected_card)
 		update_pos(hand_card)
 	
-	if selected_card:
+	if selected_card and not game_manager.is_scoring:
 		var rank: String = PlayLogic.calculate_score(selected_card).hand_name
 		game_manager.set_ranking(rank)
 	
@@ -93,8 +94,8 @@ func get_highest_z_index_card(arr:Array[Dictionary]) -> Node:
 	
 	return highest_card
 
-func sort_cards_by_x() -> void:
-	hand_card.sort_custom(func(a,b): return a.position.x < b.position.x)
+func sort_cards_by_x(cards:Array[Card]) -> void:
+	cards.sort_custom(func(a,b): return a.position.x < b.position.x)
 
 func sort_cards_by_point() -> void:
 	hand_card.sort_custom(func(a,b): return a.point > b.point)

@@ -51,7 +51,7 @@ offset_bottom = 268.0
 theme_override_font_sizes/font_size = 24
 text = "High Card"
 
-[node name="ChipsLabel" type="Label" parent="CanvasLayer" unique_id=1561683383]
+[node name="MultLabel" type="Label" parent="CanvasLayer" unique_id=1561683383]
 offset_left = 295.0
 offset_top = 307.0
 offset_right = 335.0
@@ -61,7 +61,7 @@ theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 1
 
-[node name="MultLabel" type="Label" parent="CanvasLayer" unique_id=2090736960]
+[node name="ChipsLabel" type="Label" parent="CanvasLayer" unique_id=2090736960]
 offset_left = 221.0
 offset_top = 307.0
 offset_right = 261.0
