@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://5cgetq36y1mg"]
 
 [ext_resource type="Script" uid="uid://c3egebp7ylqct" path="res://scenes/card_manager.gd" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://vbwd3umc4kw3" path="res://scenes/main.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://cewacjfdtq4xy" path="res://scenes/game_manager.gd" id="1_sugp2"]
 
 [node name="Main" type="Node2D" unique_id=25994913]
+script = ExtResource("1_jyhfs")
 
 [node name="GameManager" type="Node2D" parent="." unique_id=738848359]
 script = ExtResource("1_sugp2")
@@ -42,47 +44,59 @@ offset_bottom = 1002.0
 text = "Sort by suit"
 
 [node name="Ranking" type="Label" parent="CanvasLayer" unique_id=1824977673]
-offset_left = 233.0
-offset_top = 233.0
-offset_right = 347.0
-offset_bottom = 267.0
+offset_left = 221.0
+offset_top = 234.0
+offset_right = 335.0
+offset_bottom = 268.0
 theme_override_font_sizes/font_size = 24
 text = "High Card"
 
 [node name="ChipsLabel" type="Label" parent="CanvasLayer" unique_id=1561683383]
-offset_left = 307.0
+offset_left = 295.0
 offset_top = 307.0
-offset_right = 347.0
-offset_bottom = 330.0
+offset_right = 335.0
+offset_bottom = 352.0
 theme_override_colors/font_color = Color(0.6260754, 0, 0.08377037, 1)
+theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 1
 
 [node name="MultLabel" type="Label" parent="CanvasLayer" unique_id=2090736960]
-offset_left = 233.0
+offset_left = 221.0
 offset_top = 307.0
-offset_right = 273.0
-offset_bottom = 330.0
+offset_right = 261.0
+offset_bottom = 352.0
 theme_override_colors/font_color = Color(0, 0.4505089, 0.999319, 1)
+theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 1
 
 [node name="X" type="Label" parent="CanvasLayer" unique_id=1133912400]
-offset_left = 273.0
+offset_left = 261.0
 offset_top = 307.0
-offset_right = 313.0
-offset_bottom = 330.0
+offset_right = 301.0
+offset_bottom = 352.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
 text = "X"
 horizontal_alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=582992179]
-offset_left = 233.0
-offset_top = 170.0
-offset_right = 273.0
-offset_bottom = 193.0
+offset_left = 221.0
+offset_top = 143.0
+offset_right = 276.0
+offset_bottom = 188.0
+theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 1
+
+[node name="GoalLabel" type="Label" parent="CanvasLayer" unique_id=1803273700]
+offset_left = 221.0
+offset_top = 89.0
+offset_right = 276.0
+offset_bottom = 134.0
+theme_override_font_sizes/font_size = 32
+text = "300"
 
 [connection signal="button_down" from="CanvasLayer/DropButton" to="CardManager" method="drop_card"]
 [connection signal="button_down" from="CanvasLayer/PlayButton" to="GameManager" method="play_card"]

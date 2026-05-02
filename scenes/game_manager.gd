@@ -9,14 +9,16 @@ const rank_list = {
 	"Pair" = [10,2],
 	"Two Pair" = [20,2],
 	"Three of a Kind" = [30,3],
-	"Stright" = [30,4],
+	"Straight" = [30,4],
 	"Flush" = [35,4],
 	"Full House" = [40,4],
 	"Four of a Kind" = [60,7],
-	"Flush Stright" = [100,8]
+	"Flush Straight" = [100,8]
 }
 
+const reward_room = preload("res://scenes/reward.tscn")
 
+var goal := 300
 var now_chips := 0
 var now_mult := 0
 var now_score := 0
@@ -30,12 +32,13 @@ var _card_scene = preload("res://scenes/card.tscn")
 @onready var chips_label: Label = $"../CanvasLayer/ChipsLabel"
 @onready var score_label: Label = $"../CanvasLayer/ScoreLabel"
 @onready var mult_label: Label = $"../CanvasLayer/MultLabel"
+@onready var goal_label: Label = $"../CanvasLayer/GoalLabel"
 
 func _ready() -> void:
 	deck = create_deck()
 	temp_deck = deck
 	draw_card(hand_num - card_manager.hand_count)
-	
+	goal_label.text = str(goal)
 
 func create_deck() -> Array[Card]:
 	var _deck: Array[Card]
@@ -99,3 +102,5 @@ func play_card() -> void:
 	score_label.text = str(now_score)
 	card_manager.drop_card()
 	
+	if now_score >= goal:
+		get_tree().change_scene_to_packed(reward_room)

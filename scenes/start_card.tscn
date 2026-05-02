@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://wpepgkwxflyu"]
+
+[ext_resource type="Script" uid="uid://b5k2uw42bqid6" path="res://scenes/start_card.gd" id="1_2huie"]
+[ext_resource type="Script" uid="uid://c35ynpffx4v7k" path="res://components/DragComponent.gd" id="1_tyjcl"]
+[ext_resource type="Texture2D" uid="uid://b7t6euj2gdopd" path="res://textures/1x/Jokers.png" id="3_7vq36"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2huie"]
+size = Vector2(69, 93)
+
+[node name="StartCard" type="Area2D" unique_id=225285043]
+scale = Vector2(2, 2)
+script = ExtResource("1_2huie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1161082265]
+shape = SubResource("RectangleShape2D_2huie")
+
+[node name="Visuals" type="Sprite2D" parent="." unique_id=587822314]
+texture = ExtResource("3_7vq36")
+region_enabled = true
+region_rect = Rect2(0, 0, 71, 95)
+
+[node name="DragComponent" type="Node" parent="." unique_id=1366865522 node_paths=PackedStringArray("area")]
+script = ExtResource("1_tyjcl")
+area = NodePath("..")

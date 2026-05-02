@@ -82,7 +82,11 @@ func calculate_score(cards:Array[Card]) -> Dictionary:
 		result.hand_name = "High Card"
 		result.chips = 5
 		result.mult = 1
-		result.scoring_cards = cards  # 高牌所有牌都计分
+		var max_card = cards[0]
+		for card in cards:  # 高牌最高牌计分
+			if card.point > max_card.point:
+				max_card = card
+		result.scoring_cards = [max_card]
 	
 	# 加每张牌的点数
 	for card in result.scoring_cards:

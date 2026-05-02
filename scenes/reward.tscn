@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c7ppphfsvotul"]
+
+[ext_resource type="Script" uid="uid://bjkj3oxqbdnx1" path="res://scenes/reward.gd" id="1_4vy62"]
+
+[node name="Reward" type="Node2D" unique_id=565592090]
+script = ExtResource("1_4vy62")
+
+[node name="Button" type="Button" parent="." unique_id=2037791764]
+offset_right = 196.0
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 32
+text = "To the Shop
+"
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
