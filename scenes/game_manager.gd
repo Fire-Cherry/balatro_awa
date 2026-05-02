@@ -92,6 +92,8 @@ func set_ranking(rank:String) -> void:
 
 
 func play_card() -> void:
+	#我发现这个await一个计时器和动画什么的真的是很好的一些个东西啊
+	#反正就是产生效果不那么突兀又简单的好助手
 	if card_manager.selected_card.is_empty():
 		return
 	
@@ -101,9 +103,9 @@ func play_card() -> void:
 	for i in card_manager.selected_card.size():
 		var tween = create_tween()
 		tween.tween_property(card_manager.selected_card[i], "position", 
-							Vector2(480+960/(card_manager.selected_card.size()) * i, 500), 1)
+							Vector2(480+960/(card_manager.selected_card.size()) * i, 500), 0.5)
 	
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
 	
 	for card in score_result.scoring_cards:
 		var tween = create_tween()
