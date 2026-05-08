@@ -86,8 +86,8 @@ func set_ranking(rank:String) -> void:
 	ranking.text = rank
 	now_chips = rank_list[rank][0]
 	now_mult = rank_list[rank][1]
-	chips_label.text = str(now_chips)
-	mult_label.text = str(now_mult)
+	chips_label.animate_to(now_chips)
+	mult_label.animate_to(now_mult)
 	
 
 
@@ -113,7 +113,7 @@ func play_card() -> void:
 		tween.tween_property(card, "scale", Vector2(1.0, 1.0), 0.1)
 		
 		now_chips += (card.point + 2)
-		chips_label.text = str(now_chips)
+		chips_label.animate_to(now_chips)
 		
 		await tween.finished
 		await get_tree().create_timer(0.1).timeout
@@ -121,7 +121,7 @@ func play_card() -> void:
 	await get_tree().create_timer(0.2).timeout
 	
 	now_score += now_chips * now_mult
-	score_label.text = str(now_score)
+	score_label.animate_to(now_score,1)
 	card_manager.drop_card()
 	is_scoring = false
 	
