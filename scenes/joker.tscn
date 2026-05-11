@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://ousvsh5augvy"]
+
+[ext_resource type="Texture2D" uid="uid://b7t6euj2gdopd" path="res://textures/1x/Jokers.png" id="1_0k5k4"]
+[ext_resource type="Script" uid="uid://6aiemjoup283" path="res://scenes/joker.gd" id="1_121ux"]
+[ext_resource type="Resource" uid="uid://ddn2ua5m2ro7b" path="res://resources/joker/j1.tres" id="2_at02n"]
+[ext_resource type="Script" uid="uid://c35ynpffx4v7k" path="res://components/DragComponent.gd" id="4_h0gkn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0k5k4"]
+size = Vector2(138, 186)
+
+[node name="Joker" type="Area2D" unique_id=1088248528]
+position = Vector2(88, 102)
+script = ExtResource("1_121ux")
+joker_resource = ExtResource("2_at02n")
+
+[node name="Visuals" type="Control" parent="." unique_id=23242901]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=647153706]
+scale = Vector2(2, 2)
+texture = ExtResource("1_0k5k4")
+region_enabled = true
+region_rect = Rect2(0, 0, 71, 95)
+
+[node name="Describe_txt" type="Control" parent="Visuals" unique_id=519256266]
+anchors_preset = 0
+offset_left = -88.0
+offset_top = -95.0
+offset_right = -88.0
+offset_bottom = -95.0
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="Visuals/Describe_txt" unique_id=1109853640]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 197.0
+offset_right = 159.0
+offset_bottom = 244.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Visuals/Describe_txt" unique_id=674098642]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 207.0
+offset_right = 144.0
+offset_bottom = 234.0
+text = "Test Label"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=946647953]
+shape = SubResource("RectangleShape2D_0k5k4")
+
+[node name="DragComponent" type="Node" parent="." unique_id=708783584 node_paths=PackedStringArray("area")]
+script = ExtResource("4_h0gkn")
+area = NodePath("..")
+metadata/_custom_type_script = "uid://c35ynpffx4v7k"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

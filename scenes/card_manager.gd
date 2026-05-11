@@ -42,7 +42,7 @@ func _input(event: InputEvent) -> void:
 			is_mouse_pressed = false
 			if (get_global_mouse_position() - click_start_pos).length() < MIN_CLICK_DIST:
 				var card = ray_cast_check()
-				if card:
+				if card and card is Card:
 					if selected_card.has(card):
 						card.offset = 0
 						selected_card.erase(card)

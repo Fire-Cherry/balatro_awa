@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://vbwd3umc4kw3" path="res://scenes/main.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://cewacjfdtq4xy" path="res://scenes/game_manager.gd" id="1_sugp2"]
 [ext_resource type="Script" uid="uid://bh3tahbxvklo0" path="res://label.gd" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://ousvsh5augvy" path="res://scenes/joker.tscn" id="4_tbgi4"]
+[ext_resource type="Script" uid="uid://dx4f4q3kyllrg" path="res://scenes/joker_manager.gd" id="4_tefeu"]
 
 [node name="Main" type="Node2D" unique_id=25994913]
 script = ExtResource("1_jyhfs")
@@ -13,6 +15,12 @@ script = ExtResource("1_sugp2")
 
 [node name="CardManager" type="Node2D" parent="." unique_id=1371199706]
 script = ExtResource("1_0wfyh")
+
+[node name="JokerManager" type="Node2D" parent="." unique_id=1321188760]
+script = ExtResource("4_tefeu")
+
+[node name="Joker" parent="JokerManager" unique_id=1088248528 instance=ExtResource("4_tbgi4")]
+position = Vector2(688, 143)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=909526752]
 

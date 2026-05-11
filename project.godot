@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 Events="*uid://cmh1h03xt31pt"
 PlayLogic="*uid://b1xifreyjmcvb"
+JokerLogic="*uid://db8rbw136ftuo"
+Enums="*uid://ciwnj8s4bxkyl"
 
 [display]
 

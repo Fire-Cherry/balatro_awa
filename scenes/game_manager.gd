@@ -17,6 +17,8 @@ const rank_list = {
 }
 
 const reward_room = preload("res://scenes/reward.tscn")
+const _card_scene = preload("res://scenes/card.tscn")
+
 
 var goal := 300
 var now_chips := 0
@@ -25,10 +27,13 @@ var now_score := 0
 var hand_num := 8
 var deck: Array[Card]
 var temp_deck: Array[Card]
-var _card_scene = preload("res://scenes/card.tscn")
+var jokers: Array[Joker]
 var is_scoring := false
+var is_jokering := false
+var effect_map = {}
 
 @onready var card_manager: CardManager = $"../CardManager"
+@onready var joker_manager: Node2D = $"../JokerManager"
 @onready var ranking: Label = $"../CanvasLayer/Ranking"
 @onready var chips_label: Label = $"../CanvasLayer/ChipsLabel"
 @onready var score_label: Label = $"../CanvasLayer/ScoreLabel"
@@ -40,6 +45,8 @@ func _ready() -> void:
 	temp_deck = deck
 	draw_card(hand_num - card_manager.hand_count)
 	goal_label.text = str(goal)
+	effect_map[Enums.Effects.Mult] = _apply_mult
+	
 
 func create_deck() -> Array[Card]:
 	var _deck: Array[Card]
@@ -120,13 +127,31 @@ func play_card() -> void:
 	
 	await get_tree().create_timer(0.2).timeout
 	
+	#小丑牌计算逻辑
+	is_jokering = true
+	for joker in joker_manager.get_children():
+		var tween = create_tween()
+		tween.tween_property(joker, "scale", Vector2(1.2, 1.2), 0.15)
+		tween.tween_property(joker, "scale", Vector2(1.0, 1.0), 0.1)
+		await tween.finished
+		solve_joker_effect(joker)
+		await get_tree().create_timer(0.2).timeout
+		
 	now_score += now_chips * now_mult
 	score_label.animate_to(now_score,1)
 	card_manager.drop_card()
 	is_scoring = false
 	
-	if now_score > goal:
+	if now_score >= goal:
 		get_tree().change_scene_to_packed(reward_room)
 	
 func highlight_card(card:Card) -> void:
 	card.position.y -= 15
+
+func solve_joker_effect(joker:Joker) -> void:
+	if effect_map.has(joker.joker_resource.effect):
+		effect_map[joker.joker_resource.effect].call(joker)
+
+func _apply_mult(joker:Joker) -> void:
+	now_mult += joker.joker_resource.num
+	mult_label.animate_to(now_mult)

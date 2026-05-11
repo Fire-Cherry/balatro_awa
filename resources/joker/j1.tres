@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="JokerResource" format=3 uid="uid://ddn2ua5m2ro7b"]
+
+[ext_resource type="Script" uid="uid://v40i6bwxbxdp" path="res://resources/joker/joker.gd" id="1_gbsxf"]
+
+[resource]
+script = ExtResource("1_gbsxf")
+name = "Normal Joker"
+num = 4
+describe_txt = "Mult +4"
+metadata/_custom_type_script = "uid://v40i6bwxbxdp"
