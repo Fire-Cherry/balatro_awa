@@ -16,9 +16,8 @@ const rank_list = {
 	"Flush Straight" = [100,8]
 }
 
-const reward_room = preload("res://scenes/reward.tscn")
-const _card_scene = preload("res://scenes/card.tscn")
-
+var reward_room = preload("res://scenes/reward.tscn")
+var _card_scene = preload("res://scenes/card.tscn")
 
 var goal := 300
 var now_chips := 0
@@ -39,13 +38,17 @@ var effect_map = {}
 @onready var score_label: Label = $"../CanvasLayer/ScoreLabel"
 @onready var mult_label: Label = $"../CanvasLayer/MultLabel"
 @onready var goal_label: Label = $"../CanvasLayer/GoalLabel"
+@onready var coin_label: Label = $"../CanvasLayer/CoinLabel"
 
 func _ready() -> void:
+	goal = Enums.score_map[Enums.now_stage]
 	deck = create_deck()
 	temp_deck = deck
 	draw_card(hand_num - card_manager.hand_count)
 	goal_label.text = str(goal)
 	effect_map[Enums.Effects.Mult] = _apply_mult
+	effect_map[Enums.Effects.Chips] = _apply_chip
+	coin_label.text = str(Enums.money)
 	
 
 func create_deck() -> Array[Card]:
@@ -133,9 +136,8 @@ func play_card() -> void:
 		var tween = create_tween()
 		tween.tween_property(joker, "scale", Vector2(1.2, 1.2), 0.15)
 		tween.tween_property(joker, "scale", Vector2(1.0, 1.0), 0.1)
-		await tween.finished
 		solve_joker_effect(joker)
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.8).timeout
 		
 	now_score += now_chips * now_mult
 	score_label.animate_to(now_score,1)
@@ -143,6 +145,10 @@ func play_card() -> void:
 	is_scoring = false
 	
 	if now_score >= goal:
+		Enums.now_stage += 1
+		if Enums.now_stage >= 4:
+			#胜利
+			pass
 		get_tree().change_scene_to_packed(reward_room)
 	
 func highlight_card(card:Card) -> void:
@@ -155,3 +161,7 @@ func solve_joker_effect(joker:Joker) -> void:
 func _apply_mult(joker:Joker) -> void:
 	now_mult += joker.joker_resource.num
 	mult_label.animate_to(now_mult)
+	
+func _apply_chip(joker:Joker) -> void:
+	now_chips += joker.joker_resource.num
+	chips_label.animate_to(now_chips)

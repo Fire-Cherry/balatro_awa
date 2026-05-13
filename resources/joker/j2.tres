@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerResource" format=3 uid="uid://bhjror4xqleju"]
+
+[ext_resource type="Script" uid="uid://v40i6bwxbxdp" path="res://resources/joker/joker.gd" id="1_dkymb"]
+
+[resource]
+script = ExtResource("1_dkymb")
+name = "J2"
+texture_pos = Vector2(2, 0)
+effect = 1
+num = 50
+describe_txt = "Chips +50"
+cost = 4
+metadata/_custom_type_script = "uid://v40i6bwxbxdp"

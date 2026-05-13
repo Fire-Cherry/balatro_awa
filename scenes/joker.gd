@@ -13,7 +13,6 @@ func _ready() -> void:
 	set_visual()
 	drag_component.drag_started.connect(_on_drag_started)
 	drag_component.drag_ended.connect(_on_drag_ended)
-	
 
 func set_visual() -> void:
 	sprite_2d.region_rect = joker_resource.set_rect()
@@ -34,7 +33,6 @@ func _on_mouse_entered() -> void:
 	if not drag_component.is_dragging:
 		self.scale = Vector2(1.05,1.05)
 		describe_txt.visible = true
-
 
 func _on_mouse_exited() -> void:
 	if not drag_component.is_dragging:

@@ -24,7 +24,7 @@ mouse_filter = 2
 scale = Vector2(2, 2)
 texture = ExtResource("1_0k5k4")
 region_enabled = true
-region_rect = Rect2(0, 0, 71, 95)
+region_rect = Rect2(142, 0, 71, 95)
 
 [node name="Describe_txt" type="Control" parent="Visuals" unique_id=519256266]
 anchors_preset = 0

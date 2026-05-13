@@ -7,4 +7,5 @@ script = ExtResource("1_gbsxf")
 name = "Normal Joker"
 num = 4
 describe_txt = "Mult +4"
+cost = 4
 metadata/_custom_type_script = "uid://v40i6bwxbxdp"

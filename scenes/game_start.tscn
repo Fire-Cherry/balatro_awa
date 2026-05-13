@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://rsex73r2hlls" path="res://scenes/game_start.gd" id="1_jahr7"]
 [ext_resource type="PackedScene" uid="uid://wpepgkwxflyu" path="res://scenes/start_card.tscn" id="2_cd562"]
+[ext_resource type="Texture2D" uid="uid://bbiy0s8v241h5" path="res://textures/1x/balatro.png" id="2_s5y6q"]
 
 [node name="GameStart" type="Node2D" unique_id=994397226]
 script = ExtResource("1_jahr7")
@@ -10,13 +11,19 @@ script = ExtResource("1_jahr7")
 
 [node name="Button" type="Button" parent="CanvasLayer" unique_id=277336420]
 offset_left = 845.0
-offset_top = 683.0
+offset_top = 746.0
 offset_right = 1114.0
-offset_bottom = 758.0
+offset_bottom = 821.0
 theme_override_font_sizes/font_size = 48
 text = "Game Start"
 
+[node name="BalatroAlt" type="Sprite2D" parent="." unique_id=561406227]
+position = Vector2(985, 425)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_s5y6q")
+
 [node name="StartCard" parent="." unique_id=225285043 instance=ExtResource("2_cd562")]
 position = Vector2(985, 425)
+scale = Vector2(1.9999999, 1.9999999)
 
 [connection signal="button_down" from="CanvasLayer/Button" to="." method="_on_button_button_down"]
