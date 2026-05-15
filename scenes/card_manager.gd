@@ -28,7 +28,6 @@ func update_pos(hand_card: Array[Card]) -> void:
 		hand_card[i].z_index = i
 		var tween = create_tween()
 		tween.tween_property(hand_card[i], "position", Vector2(480+960/(hand_card.size()) * i, CARD_Y_POS - card.offset), 0.1)
-	return
 
 func _input(event: InputEvent) -> void:
 	var can_select = selected_card.size() < 5

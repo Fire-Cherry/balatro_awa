@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="JokerResource" format=3 uid="uid://dylfrik07q0qs"]
+
+[ext_resource type="Script" uid="uid://v40i6bwxbxdp" path="res://resources/joker/joker.gd" id="1_afltv"]
+
+[resource]
+script = ExtResource("1_afltv")
+name = "J3"
+texture_pos = Vector2(4, 0)
+effect = 2
+num = 12
+describe_txt = "if type is pair : mult + 12"
+cost = 4
+type = 1
+metadata/_custom_type_script = "uid://v40i6bwxbxdp"

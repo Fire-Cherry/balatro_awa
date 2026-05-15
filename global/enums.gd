@@ -4,9 +4,10 @@ extends Node
 
 const score_map = [300,450,600,1000,1200]
 
+const TYPE_TXT = ["High Card", "Pair", "Two Pair", "Three of a Kind", "Straight", "Flush", "Full House", "Four of a Kind", "Straight Flush"]
 
-enum Effects {Mult,Chips}
-enum Type {All,Pair}
+enum Effects {Mult,Chips,TypeMult,TypeChips,XMult}
+enum Type {High_Card, Pair, Two_Pair, Three_of_a_Kind, Straight, Flush, Full_House, Four_of_a_Kind, Straight_Flush}
 
 var money := 5
 var game_joker_resources: Array[JokerResource]

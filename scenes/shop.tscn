@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://7tg6gwtxvjux" path="res://scenes/shop.gd" id="1_lx5au"]
 [ext_resource type="Script" uid="uid://cxpnwb2c71c36" path="res://scenes/shop_card_manager.gd" id="2_xfvoa"]
-[ext_resource type="PackedScene" uid="uid://ekertg5kjaoa" path="res://scenes/shop_joker.tscn" id="3_1l46r"]
-[ext_resource type="Resource" uid="uid://bhjror4xqleju" path="res://resources/joker/j2.tres" id="4_032fp"]
 
 [node name="Shop" type="Node2D" unique_id=728230166]
 script = ExtResource("1_lx5au")
@@ -19,13 +17,6 @@ horizontal_alignment = 1
 
 [node name="ShopCardManager" type="Node2D" parent="." unique_id=1039518483]
 script = ExtResource("2_xfvoa")
-
-[node name="Joker" parent="ShopCardManager" unique_id=1088248528 instance=ExtResource("3_1l46r")]
-position = Vector2(915, 316)
-joker_resource = ExtResource("4_032fp")
-
-[node name="Joker2" parent="ShopCardManager" unique_id=464389872 instance=ExtResource("3_1l46r")]
-position = Vector2(1134, 316)
 
 [node name="NextStageButton" type="Button" parent="." unique_id=1267313306]
 offset_left = 516.0

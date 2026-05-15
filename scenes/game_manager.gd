@@ -13,7 +13,7 @@ const rank_list = {
 	"Flush" = [35,4],
 	"Full House" = [40,4],
 	"Four of a Kind" = [60,7],
-	"Flush Straight" = [100,8]
+	"Straight Flush" = [100,8]
 }
 
 var reward_room = preload("res://scenes/reward.tscn")
@@ -48,6 +48,7 @@ func _ready() -> void:
 	goal_label.text = str(goal)
 	effect_map[Enums.Effects.Mult] = _apply_mult
 	effect_map[Enums.Effects.Chips] = _apply_chip
+	effect_map[Enums.Effects.TypeMult] = _apply_type_mult
 	coin_label.text = str(Enums.money)
 	
 
@@ -165,3 +166,8 @@ func _apply_mult(joker:Joker) -> void:
 func _apply_chip(joker:Joker) -> void:
 	now_chips += joker.joker_resource.num
 	chips_label.animate_to(now_chips)
+
+func _apply_type_mult(joker:Joker) -> void:
+	if PlayLogic.calculate_score(card_manager.selected_card).hand_name == Enums.TYPE_TXT[joker.joker_resource.type]:
+		now_mult += joker.joker_resource.num
+		mult_label.animate_to(now_mult)
